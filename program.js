@@ -1,10 +1,12 @@
 var fs = require('fs');
 
-//returns buffer object
-var file = fs.readFileSync(process.argv[2]);
+fs.readFile(process.argv[2], "utf8", callback);
 
-var str = file.toString();
-
-var arr = str.split("\n");
-
-console.log(arr.length -1);
+function callback(err, data) {
+	if (err) {
+		console.log("Error");
+	}
+	else {
+		console.log(data.split("\n").length-1);
+	}
+};
