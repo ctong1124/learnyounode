@@ -1,13 +1,10 @@
-//console.log(process.argv);
+var fs = require('fs');
 
-var args = process.argv;
-var sum=0;
+//returns buffer object
+var file = fs.readFileSync(process.argv[2]);
 
-for (var i=2; i < process.argv.length; i++) {
-	//console.log(args[i]);
-	//console.log(typeof(Number(args[i])));
-	sum = sum + Number(args[i]);
-	//console.log(sum);
-}
+var str = file.toString();
 
-console.log(sum);
+var arr = str.split("\n");
+
+console.log(arr.length -1);
