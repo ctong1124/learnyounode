@@ -1,12 +1,22 @@
 var fs = require('fs');
+var ext = process.argv[3];
 
-fs.readFile(process.argv[2], "utf8", callback);
+fs.readdir(process.argv[2], callback);
 
-function callback(err, data) {
+function callback(err, list) {
 	if (err) {
 		console.log("Error");
 	}
 	else {
-		console.log(data.split("\n").length-1);
+		filterFile(list);
 	}
 };
+
+function filterFile(list) {
+	for(i=0; i<list.length; i++) {
+		var name_split = list[i].split(".");
+		if(name_split[1] == ext) {
+			console.log(list[i]);
+		}
+	}
+}
