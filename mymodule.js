@@ -1,21 +1,30 @@
  var fs = require('fs');
+ var http = require('http');
 
- module.exports = function (dirName, ext, callback) { 
-	fs.readdir(dirName, function(err, list) {
-		if(err) {
-			return callback(err);
-		}
-		
-		var filArray=[];
-		
-		for(i=0; i<list.length; i++) {
-			var name_split = list[i].split(".");
-			if(name_split[1] == ext) {
-				filArray.push(list[i]);
-			}
-		}	
-		callback(null, filArray)
-		})
+ module.exports = function (url, callback) { 
+
+ 	http.get(url, function(response) {
+ 		response.on("error", function(err) {
+ 			console.log('Error');
+ 		});
+ 		response.on("data", function(data) {
+ 			console.log(data.toString());
+ 		});
+ 	}) 
+
+
+//correct solution with no modules????
+/* 
+var http = require('http')
+    
+    http.get(process.argv[2], function (response) {
+      response.setEncoding('utf8')
+      response.on('data', console.log)
+      response.on('error', console.error)
+    }).on('error', console.error)
+
+
+*/ 
 
 
  } 
